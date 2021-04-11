@@ -62,7 +62,7 @@ class Solution:
                 del nums2[found_index]
         return res
     
-    # optimized time Dict/Hashmap O(min(n, m)), space O(n+m)
+    # optimized time Dict/Hashmap O(n+m), space O(n+m)
     def intersectV3(self, nums1: List[int], nums2: List[int]) -> List[int]:
         if len(nums1) > len(nums2):
             nums1, nums2 = nums2, nums1
@@ -71,4 +71,30 @@ class Solution:
         for key in counter1:
             if key in counter2:
                 res += [key] * min(counter1[key], counter2[key])
+        return res
+    
+    # optimized space Dict/Hashmap O(n+m), space O(min(n,m))
+    def intersectV4(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        if len(nums1) > len(nums2):
+            nums1, nums2 = nums2, nums1
+        res = []
+        counter = collections.Counter(nums1)
+        for num in nums2:
+            if num in counter:
+                res.append(num)
+                counter[num] -= 1
+                if counter[num] == 0:
+                    del counter[num]
+        return res
+    
+    # optimized space Dict/Hashmap O(n+m), space O(1)
+    def intersectV5(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        MAX_VALUE = 1001
+        res, freq = [], [0] * MAX_VALUE
+        for num in nums1:
+            freq[num] += 1
+        for num in nums2:
+            if freq[num] > 0:
+                res.append(num)
+                freq[num] -= 1
         return res
