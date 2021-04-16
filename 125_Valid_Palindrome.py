@@ -32,10 +32,12 @@ class Solution:
             return True
         i, j = 0, n-1
         while i < j:
-            while i < j and not s[i].isalnum():
+            if not s[i].isalnum():
                 i += 1
-            while i < j and not s[j].isalnum():
+                continue
+            if not s[j].isalnum():
                 j -= 1
+                continue
             if i < j and s[i].lower() != s[j].lower():
                 return False
             i += 1
