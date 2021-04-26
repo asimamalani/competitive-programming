@@ -24,6 +24,7 @@ Follow up: Could you do it in O(n) time and O(1) space?
 #         self.val = val
 #         self.next = next
 class Solution:
+    # time O(n), space O(n)
     def isPalindrome(self, head: ListNode) -> bool:
         if not head or not head.next:
             return True
